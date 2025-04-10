@@ -6,6 +6,7 @@ type wordStoreType = {
   chosenWord: string;
   chosenWordSplit: string[];
   guess: string;
+  guessArr: string[];
   gameStart: boolean;
   increment: () => void;
   startGame: () => void;
@@ -18,6 +19,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   chosenWordSplit: [],
   gameStart: false,
   guess: '',
+  guessArr: [],
 
   increment: () => set((state) => ({ count: state.count + 1 })),
 
@@ -34,8 +36,10 @@ const useWordStore = create<wordStoreType>((set) => ({
 
   enterInput: (letter) =>
     set((state) => {
+      const newGuess = state.guess + letter;
       return {
-        guess: state.guess + letter,
+        guess: newGuess,
+        guessArr: newGuess.split(''),
       };
     }),
 }));
