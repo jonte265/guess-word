@@ -4,9 +4,9 @@ type LetterBoxType = {
 
 function LetterBox({ letter }: LetterBoxType) {
   return (
-    <>
-      <p>{letter}</p>
-    </>
+    <div className='border-2 p-4'>
+      <p>{letter.toUpperCase()}</p>
+    </div>
   );
 }
 

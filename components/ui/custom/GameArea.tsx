@@ -26,7 +26,7 @@ function GameArea() {
               return <LetterBox key={index} letter={letr} />;
             })}
           </div>
-          <LetterBox letter='a' />
+
           {/* Keyboard */}
           <div className='flex flex-wrap justify-evenly items-center w-120'>
             {alphabetKeyboard.map((alp: string, index: number) => {
