@@ -15,16 +15,32 @@ type GameAreaType = {
 function GameArea() {
   const wordStore = useWordStore();
 
+  console.log('yo', wordStore.chosenWordSplit);
+
   return (
     <section className='flex flex-col gap-4 justify-center items-center max-w-2xl m-auto'>
       {wordStore.gameStart ? (
         <>
           {/* Question area */}
           <h1 className='text-2xl'>{wordStore.chosenWord}</h1>
+          <h1 className='text-2xl'>{wordStore.chosenWordSplit}</h1>
+
           <div className='flex flex-wrap justify-center items-center gap-1'>
             {wordStore.chosenWord.split('').map((letr, index) => {
               return <LetterBox key={index} letter={letr} />;
             })}
+          </div>
+          <div className='flex flex-wrap justify-center items-center gap-1'>
+            {wordStore.guess.split('').map((letr, index) => {
+              return <LetterBox key={index} letter={letr} />;
+            })}
+          </div>
+
+          <div className='flex flex-wrap justify-center items-center gap-1'>
+            <LetterBox letter={'a'} />
+            <LetterBox letter={'a'} />
+            <LetterBox letter={'a'} />
+            <LetterBox letter={'a'} />
           </div>
 
           {/* Keyboard */}
