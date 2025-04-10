@@ -8,13 +8,14 @@ type wordStoreType = {
   gameStart: boolean;
   increment: () => void;
   startGame: () => void;
+  enterInput: (letter: string) => void;
 };
 
 const useWordStore = create<wordStoreType>((set) => ({
   count: 0,
   chosenWord: 'default',
   gameStart: false,
-  guess: 'default',
+  guess: '',
 
   increment: () => set((state) => ({ count: state.count + 1 })),
 
@@ -23,6 +24,13 @@ const useWordStore = create<wordStoreType>((set) => ({
       return {
         gameStart: true,
         chosenWord: words[Math.floor(Math.random() * words.length)],
+      };
+    }),
+
+  enterInput: (letter) =>
+    set((state) => {
+      return {
+        guess: state.guess + letter,
       };
     }),
 }));

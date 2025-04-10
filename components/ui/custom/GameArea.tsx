@@ -35,6 +35,7 @@ function GameArea() {
                 variant='outline'
                 size='lg'
                 className='flex-1 min-w-[50px] m-1 text-center'
+                onClick={() => wordStore.enterInput(alp)}
               >
                 {alp}
               </Button>
@@ -55,6 +56,8 @@ function GameArea() {
               Submit
             </Button>
           </div>
+
+          <p>Guess: {wordStore.guess}</p>
         </>
       ) : (
         <Button onClick={wordStore.startGame}>Start</Button>
