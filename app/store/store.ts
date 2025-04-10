@@ -10,9 +10,11 @@ type wordStoreType = {
   guessLetterBox: number;
   gameArr: string[][];
   gameStart: boolean;
+  win: boolean;
 
   startGame: () => void;
   backspaceInput: () => void;
+  makeGuess: () => void;
   enterInput: (letter: string) => void;
 };
 
@@ -28,6 +30,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   gameArr: [],
 
   gameStart: false,
+  win: false,
 
   startGame: () =>
     set((state) => {
@@ -90,6 +93,22 @@ const useWordStore = create<wordStoreType>((set) => ({
 
         guessLetterBox: state.guessLetterBox - 1,
       };
+    }),
+
+  makeGuess: () =>
+    set((state) => {
+      console.log(
+        'Comparing:',
+        state.guess.toUpperCase(),
+        state.chosenWord.toUpperCase()
+      );
+      if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
+        return {
+          win: true,
+        };
+      } else {
+        return {};
+      }
     }),
 }));
 
