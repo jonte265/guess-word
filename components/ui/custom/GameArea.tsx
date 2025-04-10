@@ -42,10 +42,24 @@ function GameArea() {
           </div>
 
           <div className='flex flex-wrap justify-center items-center gap-1'>
-            <LetterBox letter={'a'} />
-            <LetterBox letter={'a'} />
-            <LetterBox letter={'a'} />
-            <LetterBox letter={'a'} />
+            {wordStore.guessArr.map((letr, index) => {
+              return <LetterBox key={index} letter={letr} />;
+            })}
+          </div>
+
+          <div className='flex flex-wrap justify-center items-center gap-1'>
+            {wordStore.chosenWordSplit.map((guess, index) => {
+              return (
+                <div>
+                  <LetterBox key={index} letter='b' />
+                  <LetterBox key={index} letter='b' />
+                  <LetterBox key={index} letter='b' />
+                  <LetterBox key={index} letter='b' />
+                  <LetterBox key={index} letter='b' />
+                  <LetterBox key={index} letter='b' />
+                </div>
+              );
+            })}
           </div>
 
           {/* Keyboard */}

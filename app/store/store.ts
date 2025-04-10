@@ -37,10 +37,15 @@ const useWordStore = create<wordStoreType>((set) => ({
   enterInput: (letter) =>
     set((state) => {
       const newGuess = state.guess + letter;
-      return {
-        guess: newGuess,
-        guessArr: newGuess.split(''),
-      };
+
+      if (newGuess.length <= state.chosenWord.length) {
+        return {
+          guess: newGuess,
+          guessArr: newGuess.split(''),
+        };
+      }
+
+      return {};
     }),
 }));
 
