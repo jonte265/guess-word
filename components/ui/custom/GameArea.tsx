@@ -28,14 +28,32 @@ function GameArea() {
           </div>
 
           {/* Keyboard */}
-          <div className='flex flex-wrap justify-evenly items-center w-120'>
-            {alphabetKeyboard.map((alp: string, index: number) => {
-              return (
-                <Button key={index} variant='outline'>
-                  {alp}
-                </Button>
-              );
-            })}
+          <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 border rounded-lg'>
+            {alphabetKeyboard.map((alp: string, index: number) => (
+              <Button
+                key={index}
+                variant='outline'
+                size='lg'
+                className='flex-1 min-w-[50px] m-1 text-center'
+              >
+                {alp}
+              </Button>
+            ))}
+
+            <Button
+              variant='outline'
+              size='lg'
+              className='flex-1 min-w-[50px] m-1'
+            >
+              🔙
+            </Button>
+            <Button
+              variant='outline'
+              size='lg'
+              className='flex-1 min-w-[50px] m-1'
+            >
+              Submit
+            </Button>
           </div>
         </>
       ) : (

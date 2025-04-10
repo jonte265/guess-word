@@ -4,6 +4,7 @@ import { create } from 'zustand';
 type wordStoreType = {
   count: number;
   chosenWord: string;
+  guess: string;
   gameStart: boolean;
   increment: () => void;
   startGame: () => void;
@@ -13,6 +14,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   count: 0,
   chosenWord: 'default',
   gameStart: false,
+  guess: 'default',
 
   increment: () => set((state) => ({ count: state.count + 1 })),
 
