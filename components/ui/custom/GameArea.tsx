@@ -1,13 +1,18 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
 import words from '@/app/data/words.json';
 import alphabet from '@/app/data/alphabet.json';
-import alphabetKeyboard from '@/app/data/alphabetKeyboard';
-import { Button } from '@/components/ui/button';
+import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
+import useWordStore from '@/app/store/store';
 
 type GameAreaType = {
   alp: string;
 };
 
 function GameArea() {
+  const wordStore = useWordStore();
+
   return (
     <section className='flex flex-col justify-center items-center max-w-2xl m-auto'>
       {/* KeyBoard */}
@@ -20,6 +25,9 @@ function GameArea() {
           );
         })}
       </div>
+
+      <Button onClick={wordStore.increment}>Click me</Button>
+      <p>{wordStore.count}</p>
     </section>
   );
 }
