@@ -35,7 +35,11 @@ function GameArea() {
             {wordStore.gameArr.map((arr, rowIndex) => (
               <div key={rowIndex} className='flex justify-center gap-1'>
                 {arr.map((box, boxIndex) => (
-                  <LetterBox key={boxIndex} letter={box} />
+                  <LetterBox
+                    key={boxIndex}
+                    letter={box.letter}
+                    status={box.status}
+                  />
                 ))}
               </div>
             ))}

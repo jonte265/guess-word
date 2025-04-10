@@ -9,6 +9,7 @@ type wordStoreType = {
   guessRow: number;
   guessLetterBox: number;
   gameArr: string[][];
+
   gameStart: boolean;
   win: boolean;
   gameOver: boolean;
@@ -44,14 +45,13 @@ const useWordStore = create<wordStoreType>((set) => ({
         guessLetterBox: 0,
         chosenWord: newWord,
         chosenWordSplit: newWord.split(''),
-        gameArr: [
-          new Array(newWord.length).fill(''),
-          new Array(newWord.length).fill(''),
-          new Array(newWord.length).fill(''),
-          new Array(newWord.length).fill(''),
-          new Array(newWord.length).fill(''),
-          new Array(newWord.length).fill(''),
-        ],
+        gameArr: Array(6)
+          .fill(null)
+          .map(() =>
+            new Array(newWord.length)
+              .fill({ guessLetter: '', status: 0 })
+              .map(() => ({ guessLetter: '', status: 0 }))
+          ),
       };
     }),
 
@@ -65,8 +65,10 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       const updateGamerArr = [...state.gameArr];
 
+      console.log(typeof letter);
+
       // Update row with guess
-      updateGamerArr[state.guessRow][state.guessLetterBox] = letter;
+      updateGamerArr[state.guessRow][state.guessLetterBox].guessLetter = letter;
 
       return {
         guess: newGuess,
@@ -103,6 +105,7 @@ const useWordStore = create<wordStoreType>((set) => ({
       if (state.guess.length < state.chosenWord.length) {
         return {};
       }
+
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
           win: true,
