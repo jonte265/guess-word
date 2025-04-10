@@ -17,6 +17,7 @@ function GameArea() {
 
   console.log('chosenWordSplit', wordStore.chosenWordSplit);
   console.log('guessArr', wordStore.guessArr);
+  console.log('gameArr', wordStore.gameArr);
 
   return (
     <section className='flex flex-col gap-4 justify-center items-center max-w-2xl m-auto'>
@@ -30,36 +31,14 @@ function GameArea() {
           <h1 className='text-2xl'>guess: {wordStore.guess}</h1>
           <h1 className='text-2xl'>guessArr: {wordStore.guessArr}</h1>
 
-          <div className='flex flex-wrap justify-center items-center gap-1'>
-            {wordStore.chosenWord.split('').map((letr, index) => {
-              return <LetterBox key={index} letter={letr} />;
-            })}
-          </div>
-          <div className='flex flex-wrap justify-center items-center gap-1'>
-            {wordStore.guess.split('').map((letr, index) => {
-              return <LetterBox key={index} letter={letr} />;
-            })}
-          </div>
-
-          <div className='flex flex-wrap justify-center items-center gap-1'>
-            {wordStore.guessArr.map((letr, index) => {
-              return <LetterBox key={index} letter={letr} />;
-            })}
-          </div>
-
-          <div className='flex flex-wrap justify-center items-center gap-1'>
-            {wordStore.chosenWordSplit.map((guess, index) => {
-              return (
-                <div>
-                  <LetterBox key={index} letter='b' />
-                  <LetterBox key={index} letter='b' />
-                  <LetterBox key={index} letter='b' />
-                  <LetterBox key={index} letter='b' />
-                  <LetterBox key={index} letter='b' />
-                  <LetterBox key={index} letter='b' />
-                </div>
-              );
-            })}
+          <div className='flex flex-col justify-center items-center gap-2'>
+            {wordStore.gameArr.map((arr, rowIndex) => (
+              <div key={rowIndex} className='flex justify-center gap-1'>
+                {arr.map((box, boxIndex) => (
+                  <LetterBox key={boxIndex} letter={box} />
+                ))}
+              </div>
+            ))}
           </div>
 
           {/* Keyboard */}
@@ -77,6 +56,7 @@ function GameArea() {
             ))}
 
             <Button
+              onClick={wordStore.backspaceInput}
               variant='outline'
               size='lg'
               className='flex-1 min-w-[50px] m-1'

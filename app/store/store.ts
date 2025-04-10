@@ -2,26 +2,32 @@ import words from '@/app/data/words.json';
 import { create } from 'zustand';
 
 type wordStoreType = {
-  count: number;
   chosenWord: string;
   chosenWordSplit: string[];
   guess: string;
   guessArr: string[];
+  guessRow: number;
+  guessLetterBox: number;
+  gameArr: string[][];
   gameStart: boolean;
-  increment: () => void;
+
   startGame: () => void;
+  backspaceInput: () => void;
   enterInput: (letter: string) => void;
 };
 
 const useWordStore = create<wordStoreType>((set) => ({
-  count: 0,
   chosenWord: 'default',
   chosenWordSplit: [],
-  gameStart: false,
+
   guess: '',
   guessArr: [],
+  guessRow: 0,
+  guessLetterBox: 0,
 
-  increment: () => set((state) => ({ count: state.count + 1 })),
+  gameArr: [],
+
+  gameStart: false,
 
   startGame: () =>
     set((state) => {
@@ -31,6 +37,14 @@ const useWordStore = create<wordStoreType>((set) => ({
         gameStart: true,
         chosenWord: newWord,
         chosenWordSplit: newWord.split(''),
+        gameArr: [
+          new Array(newWord.length).fill(''),
+          new Array(newWord.length).fill(''),
+          new Array(newWord.length).fill(''),
+          new Array(newWord.length).fill(''),
+          new Array(newWord.length).fill(''),
+          new Array(newWord.length).fill(''),
+        ],
       };
     }),
 
@@ -38,14 +52,44 @@ const useWordStore = create<wordStoreType>((set) => ({
     set((state) => {
       const newGuess = state.guess + letter;
 
-      if (newGuess.length <= state.chosenWord.length) {
-        return {
-          guess: newGuess,
-          guessArr: newGuess.split(''),
-        };
+      // Stop if guess too long
+      if (newGuess.length > state.chosenWord.length) {
+        return {};
       }
 
-      return {};
+      const updateGamerArr = [...state.gameArr];
+
+      // Update row with guess
+      updateGamerArr[state.guessRow][state.guessLetterBox] = letter;
+
+      return {
+        guess: newGuess,
+        guessArr: newGuess.split(''),
+        gameArr: updateGamerArr,
+
+        guessLetterBox: state.guessLetterBox + 1,
+      };
+    }),
+
+  backspaceInput: () =>
+    set((state) => {
+      if (state.guessLetterBox === 0) {
+        return {};
+      }
+
+      const updateGamerArr = [...state.gameArr];
+
+      updateGamerArr[state.guessRow][state.guessLetterBox - 1] = '';
+
+      const updatedGuess = state.guess.slice(0, -1);
+
+      return {
+        guess: updatedGuess,
+        guessArr: updatedGuess.split(''),
+        gameArr: updateGamerArr,
+
+        guessLetterBox: state.guessLetterBox - 1,
+      };
     }),
 }));
 
