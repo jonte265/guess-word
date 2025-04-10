@@ -80,6 +80,12 @@ function GameArea() {
           ) : (
             <p className='font-bold'>You dont win</p>
           )}
+          {wordStore.gameOver ? (
+            <p className='font-bold'>GAME OVER</p>
+          ) : (
+            <p className='font-bold'>not game over</p>
+          )}
+          <p>guessrow: {wordStore.guessRow}</p>
         </>
       ) : (
         <Button onClick={wordStore.startGame}>Start</Button>

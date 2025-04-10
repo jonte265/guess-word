@@ -11,6 +11,7 @@ type wordStoreType = {
   gameArr: string[][];
   gameStart: boolean;
   win: boolean;
+  gameOver: boolean;
 
   startGame: () => void;
   backspaceInput: () => void;
@@ -31,6 +32,7 @@ const useWordStore = create<wordStoreType>((set) => ({
 
   gameStart: false,
   win: false,
+  gameOver: false,
 
   startGame: () =>
     set((state) => {
@@ -38,6 +40,8 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       return {
         gameStart: true,
+        guessRow: 0,
+        guessLetterBox: 0,
         chosenWord: newWord,
         chosenWordSplit: newWord.split(''),
         gameArr: [
@@ -55,7 +59,6 @@ const useWordStore = create<wordStoreType>((set) => ({
     set((state) => {
       const newGuess = state.guess + letter;
 
-      // Stop if guess too long
       if (newGuess.length > state.chosenWord.length) {
         return {};
       }
@@ -97,17 +100,23 @@ const useWordStore = create<wordStoreType>((set) => ({
 
   makeGuess: () =>
     set((state) => {
-      console.log(
-        'Comparing:',
-        state.guess.toUpperCase(),
-        state.chosenWord.toUpperCase()
-      );
+      if (state.guess.length < state.chosenWord.length) {
+        return {};
+      }
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
           win: true,
         };
+      } else if (state.guessRow >= 5) {
+        return {
+          gameOver: true,
+        };
       } else {
-        return {};
+        return {
+          guessRow: state.guessRow + 1,
+          guessLetterBox: 0,
+          guess: '',
+        };
       }
     }),
 }));
