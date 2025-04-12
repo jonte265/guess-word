@@ -63,7 +63,7 @@ function GameArea() {
               🔙
             </Button>
             <Button
-              onClick={wordStore.makeGuess}
+              onClick={wordStore.submitGuess}
               variant='outline'
               size='lg'
               className='flex-1 min-w-[50px] m-1'
@@ -71,6 +71,8 @@ function GameArea() {
               Submit
             </Button>
           </div>
+
+          {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>}
         </>
       ) : (
         <Button onClick={wordStore.startGame}>Start</Button>

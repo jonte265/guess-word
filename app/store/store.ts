@@ -11,12 +11,14 @@ type wordStoreType = {
   guess: string;
   gameStart: boolean;
   gameOver: boolean;
+  gameWin: boolean;
   gameBoard: Cell[][];
   rowIndex: number;
   cellIndex: number;
   startGame: () => void;
   backspaceInput: () => void;
   enterInput: (alp: string) => void;
+  submitGuess: () => void;
 };
 
 const useWordStore = create<wordStoreType>((set) => ({
@@ -24,6 +26,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   guess: '',
   gameStart: false,
   gameOver: false,
+  gameWin: false,
 
   gameBoard: [],
   rowIndex: 0,
@@ -92,6 +95,23 @@ const useWordStore = create<wordStoreType>((set) => ({
         gameBoard: newGameBoard,
         cellIndex: newCellIndex,
       };
+    }),
+
+  submitGuess: () =>
+    set((state) => {
+      console.log('guess:', state.guess);
+      console.log('chosenWord:', state.chosenWord);
+
+      if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
+        return {
+          gameWin: true,
+        };
+      } else {
+        return {
+          rowIndex: state.rowIndex + 1,
+          guess: '',
+        };
+      }
     }),
 }));
 
