@@ -62,6 +62,8 @@ const useWordStore = create<wordStoreType>((set) => ({
       );
 
       console.log('newgameboard:', newGameBoard);
+      console.log('rowIndex:', state.rowIndex);
+      console.log('cellIndex:', state.cellIndex);
 
       newGameBoard[state.rowIndex][state.cellIndex].letter = alp;
 
@@ -99,6 +101,9 @@ const useWordStore = create<wordStoreType>((set) => ({
 
   submitGuess: () =>
     set((state) => {
+      if (state.rowIndex >= 6) {
+        return {};
+      }
       console.log('guess:', state.guess);
       console.log('chosenWord:', state.chosenWord);
 
@@ -109,6 +114,7 @@ const useWordStore = create<wordStoreType>((set) => ({
       } else {
         return {
           rowIndex: state.rowIndex + 1,
+          cellIndex: 0,
           guess: '',
         };
       }
