@@ -40,6 +40,10 @@ function GameArea() {
             ))}
           </div>
 
+          {wordStore.gameWin === true && (
+            <Button onClick={wordStore.startGame}>Play Again</Button>
+          )}
+
           {/* Keyboard */}
           <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 border rounded-lg'>
             {alphabetKeyboard.map((alp: string, index: number) => (
@@ -75,7 +79,10 @@ function GameArea() {
           {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>}
         </>
       ) : (
-        <Button onClick={wordStore.startGame}>Start</Button>
+        <div className='flex flex-col gap-4 justify-center items-center'>
+          <h1 className='text-2xl'>Guess the right word in 5 guesses!</h1>
+          <Button onClick={wordStore.startGame}>Start</Button>
+        </div>
       )}
     </section>
   );

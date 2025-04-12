@@ -46,6 +46,7 @@ const useWordStore = create<wordStoreType>((set) => ({
         gameBoard: gameBoard,
         rowIndex: 0,
         cellIndex: 0,
+        gameWin: false,
       };
     }),
 
@@ -118,6 +119,8 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       splitChosenWord.forEach((split, index) => {
         console.log('körs! Index: + split:', index, split);
+
+        newGameBoard[state.rowIndex][index].correct = 1;
 
         if (
           newGameBoard[state.rowIndex][index].letter.toUpperCase() ===

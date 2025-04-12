@@ -9,7 +9,7 @@ function LetterBox({ letter, status }: LetterBoxType) {
   if (status === 0) {
     backgroundColor = 'bg-white'; // Neutral
   } else if (status === 1) {
-    backgroundColor = 'bg-gray-500'; // Incorrect
+    backgroundColor = 'bg-gray-100'; // Incorrect
   } else if (status === 2) {
     backgroundColor = 'bg-yellow-500'; // Partial
   } else if (status === 3) {
@@ -21,7 +21,7 @@ function LetterBox({ letter, status }: LetterBoxType) {
       className={`border-2 p-4 min-w-12 min-h-16 text-center ${backgroundColor}`}
     >
       {/* If no letter add empty space  */}
-      <p>{letter}</p>
+      <p className='font-semibold'>{letter}</p>
     </div>
   );
 }
