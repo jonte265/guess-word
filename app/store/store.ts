@@ -104,18 +104,45 @@ const useWordStore = create<wordStoreType>((set) => ({
       if (state.rowIndex >= 6) {
         return {};
       }
+
       console.log('guess:', state.guess);
       console.log('chosenWord:', state.chosenWord);
+
+      const newGameBoard = state.gameBoard.map((row) =>
+        row.map((cell) => ({ ...cell }))
+      );
+
+      const splitChosenWord = state.chosenWord.split('');
+
+      console.log('splitChosenWord:', splitChosenWord);
+
+      splitChosenWord.forEach((split, index) => {
+        console.log('körs! Index: + split:', index, split);
+
+        if (
+          newGameBoard[state.rowIndex][index].letter.toUpperCase() ===
+          split.toUpperCase()
+        ) {
+          console.log(
+            'MATCH:',
+            newGameBoard[state.rowIndex][index].letter + split
+          );
+
+          newGameBoard[state.rowIndex][index].correct = 3;
+        }
+      });
 
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
           gameWin: true,
+          gameBoard: newGameBoard,
         };
       } else {
         return {
           rowIndex: state.rowIndex + 1,
           cellIndex: 0,
           guess: '',
+          gameBoard: newGameBoard,
         };
       }
     }),
