@@ -17,9 +17,11 @@ function LetterBox({ letter, status }: LetterBoxType) {
   }
 
   return (
-    <div className={`border-2 p-4 min-w-12 text-center ${backgroundColor}`}>
+    <div
+      className={`border-2 p-4 min-w-12 min-h-16 text-center ${backgroundColor}`}
+    >
       {/* If no letter add empty space  */}
-      <p>{letter ? letter.toUpperCase() : '\u00A0'}</p>
+      <p>{letter}</p>
     </div>
   );
 }

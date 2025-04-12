@@ -15,34 +15,19 @@ type GameAreaType = {
 function GameArea() {
   const wordStore = useWordStore();
 
-  console.log('chosenWordSplit', wordStore.chosenWordSplit);
-  console.log('guessArr', wordStore.guessArr);
-  console.log('gameArr', wordStore.gameArr);
-
   return (
     <section className='flex flex-col gap-4 justify-center items-center max-w-2xl m-auto'>
       {wordStore.gameStart ? (
         <>
           {/* Question area */}
           <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
-          <h1 className='text-2xl'>
-            chosenWordSplit: {wordStore.chosenWordSplit}
-          </h1>
-          <h1 className='text-2xl'>guess: {wordStore.guess}</h1>
-          <h1 className='text-2xl'>guessArr: {wordStore.guessArr}</h1>
-
-          <div className='flex flex-col justify-center items-center gap-2'>
-            {wordStore.gameArr.map((arr, rowIndex) => (
-              <div key={rowIndex} className='flex justify-center gap-1'>
-                {arr.map((box, boxIndex) => (
-                  <LetterBox
-                    key={boxIndex}
-                    letter={box.letter}
-                    status={box.status}
-                  />
-                ))}
-              </div>
-            ))}
+          <h1 className='text-2xl'>Guess: {wordStore.guess}</h1>
+          <div className='flex gap-2'>
+            <LetterBox letter='A' />
+            <LetterBox />
+            <LetterBox />
+            <LetterBox />
+            <LetterBox />
           </div>
 
           {/* Keyboard */}
@@ -76,20 +61,6 @@ function GameArea() {
               Submit
             </Button>
           </div>
-
-          <p>Guess: {wordStore.guess}</p>
-          <p>{wordStore.win}</p>
-          {wordStore.win ? (
-            <p className='font-bold'>You win</p>
-          ) : (
-            <p className='font-bold'>You dont win</p>
-          )}
-          {wordStore.gameOver ? (
-            <p className='font-bold'>GAME OVER</p>
-          ) : (
-            <p className='font-bold'>not game over</p>
-          )}
-          <p>guessrow: {wordStore.guessRow}</p>
         </>
       ) : (
         <Button onClick={wordStore.startGame}>Start</Button>
