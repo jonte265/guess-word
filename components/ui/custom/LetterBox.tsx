@@ -6,14 +6,14 @@ type LetterBoxType = {
 function LetterBox({ letter, status }: LetterBoxType) {
   let backgroundColor;
 
-  if (status === 1) {
-    backgroundColor = 'bg-green-500'; // Match
+  if (status === 0) {
+    backgroundColor = 'bg-white'; // Neutral
+  } else if (status === 1) {
+    backgroundColor = 'bg-gray-500'; // Incorrect
   } else if (status === 2) {
     backgroundColor = 'bg-yellow-500'; // Partial
   } else if (status === 3) {
-    backgroundColor = 'bg-gray-500'; // Incorrect
-  } else {
-    backgroundColor = 'bg-white'; // Neutral
+    backgroundColor = 'bg-green-500'; // Match
   }
 
   return (

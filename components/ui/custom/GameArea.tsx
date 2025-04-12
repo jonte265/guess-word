@@ -15,6 +15,8 @@ type GameAreaType = {
 function GameArea() {
   const wordStore = useWordStore();
 
+  console.log(wordStore.gameBoard);
+
   return (
     <section className='flex flex-col gap-4 justify-center items-center max-w-2xl m-auto'>
       {wordStore.gameStart ? (
@@ -22,13 +24,18 @@ function GameArea() {
           {/* Question area */}
           <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
           <h1 className='text-2xl'>Guess: {wordStore.guess}</h1>
-          <div className='flex gap-2'>
-            <LetterBox letter='A' />
-            <LetterBox />
-            <LetterBox />
-            <LetterBox />
-            <LetterBox />
-          </div>
+
+          {wordStore.gameBoard.map((row, rowIndex) => (
+            <div className='flex gap-2' key={rowIndex}>
+              {row.map((cell, colIndex) => (
+                <LetterBox
+                  key={colIndex}
+                  letter={cell.letter}
+                  status={cell.correct}
+                />
+              ))}
+            </div>
+          ))}
 
           {/* Keyboard */}
           <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 border rounded-lg'>
