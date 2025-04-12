@@ -47,6 +47,8 @@ const useWordStore = create<wordStoreType>((set) => ({
         rowIndex: 0,
         cellIndex: 0,
         gameWin: false,
+        gameOver: false,
+        guess: '',
       };
     }),
 
