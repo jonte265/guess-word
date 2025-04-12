@@ -33,7 +33,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   cellIndex: 0,
 
   startGame: () =>
-    set((state) => {
+    set(() => {
       const newWord = words[Math.floor(Math.random() * words.length)];
 
       const gameBoard = Array(6)

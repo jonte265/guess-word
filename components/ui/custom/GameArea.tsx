@@ -1,16 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import words from '@/app/data/words.json';
-import alphabet from '@/app/data/alphabet.json';
 import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
 import useWordStore from '@/app/store/store';
-import { useEffect } from 'react';
 import LetterBox from './LetterBox';
 
-type GameAreaType = {
-  alp: string;
-};
+// type GameAreaType = {
+//   alp: string;
+// };
 
 function GameArea() {
   const wordStore = useWordStore();
