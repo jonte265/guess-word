@@ -119,53 +119,6 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       const splitChosenWord = state.chosenWord.toUpperCase().split('');
 
-      // // Make boxes gray,green,yellow
-      // splitChosenWord.forEach((split, index) => {
-      //   // Default grey box
-      //   newGameBoard[state.rowIndex][index].correct = 1;
-
-      //   // Count how many letters is used
-      //   const letterCountWord = splitChosenWord;
-
-      //   const currentLetter =
-      //     newGameBoard[state.rowIndex][index].letter.toUpperCase();
-
-      //   console.log('indexRemove before: ', currentLetter);
-      //   console.log('indexRemove before lettercoundword : ', letterCountWord);
-
-      //   const indexRemove = letterCountWord.indexOf(currentLetter);
-
-      //   console.log('indexRemove after: ', indexRemove);
-
-      //   // If match, green box
-      //   if (currentLetter === split.toUpperCase()) {
-      //     newGameBoard[state.rowIndex][index].correct = 3;
-
-      //     console.log('SPLICE letterCountWord : ', letterCountWord);
-      //     letterCountWord.splice(indexRemove, 1);
-
-      //     console.log('AFTER SPLICE letterCountWord : ', letterCountWord);
-      //   }
-      //   // If Contains, yellow box
-      //   else if (
-      //     state.chosenWord.toUpperCase().includes(currentLetter) &&
-      //     letterCountWord.includes(currentLetter)
-      //   ) {
-      //     console.log('YELLOW BOX');
-
-      //     console.log(
-      //       'letterCountWord.includes(currentLetter): ',
-      //       letterCountWord.includes(currentLetter)
-      //     );
-      //     console.log('letterCountWord: ', letterCountWord);
-      //     console.log('currentLetter: ', currentLetter);
-
-      //     newGameBoard[state.rowIndex][index].correct = 2;
-      //   }
-      // });
-
-      // Count how many letters is used
-
       const usedLetters = state.chosenWord.toUpperCase().split('');
 
       let indexRemove;
