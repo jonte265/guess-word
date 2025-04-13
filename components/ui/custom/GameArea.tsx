@@ -46,9 +46,16 @@ function GameArea() {
           {wordStore.gameOver === true && (
             <>
               <h1 className='text-2xl'>Game Over!</h1>
-              <h1 className='text-2xl font-semibold'>
-                Answer: {wordStore.chosenWord}
-              </h1>
+              <h1 className='text-2xl font-semibold'>Answer:</h1>
+              <div className='flex gap-2 items-center justify-center'>
+                {wordStore.chosenWord.split('').map((word, index) => {
+                  return (
+                    <div className='flex justify-center items-center'>
+                      <LetterBox key={index} letter={word} />
+                    </div>
+                  );
+                })}
+              </div>
               <Button onClick={wordStore.startGame}>Play Again</Button>
             </>
           )}
