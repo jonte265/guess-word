@@ -76,7 +76,7 @@ function GameArea() {
           )}
 
           {/* Keyboard */}
-          <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 border rounded-lg'>
+          <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 mt-4 border rounded-lg'>
             {alphabetKeyboard.map((alp: string, index: number) => (
               <Button
                 key={index}
@@ -107,7 +107,7 @@ function GameArea() {
             </Button>
           </div>
 
-          {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>}
+          {/* {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>} */}
         </>
       ) : (
         <div className='flex flex-col gap-8 justify-center items-center'>
