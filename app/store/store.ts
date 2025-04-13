@@ -207,7 +207,8 @@ const useWordStore = create<wordStoreType>((set) => ({
 
         if (
           state.chosenWord.toUpperCase().includes(currentLetter) &&
-          usedLetters.includes(currentLetter)
+          usedLetters.includes(currentLetter) &&
+          newGameBoard[state.rowIndex][index].correct !== 3
         ) {
           console.log(
             'chosen word includes: ',
