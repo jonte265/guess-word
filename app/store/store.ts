@@ -127,21 +127,48 @@ const useWordStore = create<wordStoreType>((set) => ({
       splitChosenWord.forEach((split, index) => {
         console.log('körs! Index: + split:', index, split);
 
+        // Count how many letters i used
+        const letterCountWord = splitChosenWord;
+        console.log('letterCountWord : ', letterCountWord);
+
+        // Default grey box
         newGameBoard[state.rowIndex][index].correct = 1;
 
-        if (
-          newGameBoard[state.rowIndex][index].letter.toUpperCase() ===
-          split.toUpperCase()
-        ) {
+        const currentLetter =
+          newGameBoard[state.rowIndex][index].letter.toUpperCase();
+
+        // If match, green box
+        if (currentLetter === split.toUpperCase()) {
           console.log(
             'MATCH:',
             newGameBoard[state.rowIndex][index].letter + split
           );
 
           newGameBoard[state.rowIndex][index].correct = 3;
+
+          const indexRemove = letterCountWord.indexOf(currentLetter);
+
+          letterCountWord.splice(indexRemove, 1);
+
+          console.log('letterCountWord : ', letterCountWord);
+        } else if (
+          // If Contains, yellow box
+          state.chosenWord.toUpperCase().includes(currentLetter) &&
+          letterCountWord.includes(currentLetter)
+        ) {
+          console.log(
+            'PARTIAL MATCH:',
+            newGameBoard[state.rowIndex][index].letter +
+              split.toUpperCase().includes(currentLetter)
+          );
+
+          newGameBoard[state.rowIndex][index].correct = 2;
         }
       });
 
+      console.log('newgameboard:', newGameBoard);
+
+      // Check if correct guess
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
           gameWin: true,
