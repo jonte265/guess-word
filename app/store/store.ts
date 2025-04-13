@@ -1,5 +1,5 @@
 import words from '@/app/data/words.json';
-import { log } from 'node:console';
+
 import { create } from 'zustand';
 
 type Cell = {
@@ -67,10 +67,6 @@ const useWordStore = create<wordStoreType>((set) => ({
         row.map((cell) => ({ ...cell }))
       );
 
-      console.log('newgameboard:', newGameBoard);
-      console.log('rowIndex:', state.rowIndex);
-      console.log('cellIndex:', state.cellIndex);
-
       newGameBoard[state.rowIndex][state.cellIndex].letter = alp;
 
       return {
@@ -93,8 +89,6 @@ const useWordStore = create<wordStoreType>((set) => ({
       const newGameBoard = state.gameBoard.map((row) =>
         row.map((cell) => ({ ...cell }))
       );
-
-      console.log('newgameboard:', newGameBoard);
 
       newGameBoard[state.rowIndex][newCellIndex].letter = '';
 
@@ -125,18 +119,13 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       let indexRemove;
 
-      console.log('usedLetters: ', usedLetters);
-
       // Mark as grey
       splitChosenWord.forEach((split, index) => {
-        console.log('Mark as grey');
-
         newGameBoard[state.rowIndex][index].correct = 1;
       });
 
       // Mark as green
       splitChosenWord.forEach((split, index) => {
-        console.log('Körs green');
         const currentLetter =
           newGameBoard[state.rowIndex][index].letter.toUpperCase();
 
@@ -145,45 +134,25 @@ const useWordStore = create<wordStoreType>((set) => ({
 
           indexRemove = usedLetters.indexOf(currentLetter);
 
-          console.log('usedLetters before splice: ', usedLetters);
           usedLetters.splice(indexRemove, 1);
-          console.log('usedLetters after splice: ', usedLetters);
         }
       });
 
       // Mark as yellow
       splitChosenWord.forEach((split, index) => {
-        console.log('Körs yellow');
-
         const currentLetter =
           newGameBoard[state.rowIndex][index].letter.toUpperCase();
-
-        console.log('usedLetters before yellow if: ', usedLetters);
 
         if (
           state.chosenWord.toUpperCase().includes(currentLetter) &&
           usedLetters.includes(currentLetter) &&
           newGameBoard[state.rowIndex][index].correct !== 3
         ) {
-          console.log(
-            'chosen word includes: ',
-            state.chosenWord.toUpperCase().includes(currentLetter),
-            currentLetter
-          );
-          console.log(
-            'usedLEtters includes: ',
-            usedLetters.includes(currentLetter),
-            currentLetter
-          );
-
           newGameBoard[state.rowIndex][index].correct = 2;
-          console.log('usedLetters in yellow if: ', usedLetters);
 
           indexRemove = usedLetters.indexOf(currentLetter);
 
-          console.log('usedLetters before splice: ', usedLetters);
           usedLetters.splice(indexRemove, 1);
-          console.log('usedLetters after splice: ', usedLetters);
         }
       });
 
