@@ -29,8 +29,8 @@ function GameArea() {
       {wordStore.gameStart ? (
         <>
           {/* Question area */}
-          <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
-          <h1 className='text-2xl'>Guess: {wordStore.guess}</h1>
+          {/* <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
+          <h1 className='text-2xl'>Guess: {wordStore.guess}</h1> */}
 
           <div className='flex justify-center items-center flex-col gap-4'>
             {wordStore.gameBoard.map((row, rowIndex) => (
