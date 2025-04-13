@@ -6,7 +6,7 @@ function HeaderNav() {
   const wordStore = useWordStore();
 
   return (
-    <header className='flex flex-row flex-wrap justify-between items-center p-4'>
+    <header className='flex flex-row flex-wrap justify-between items-center p-4 max-w-2xl mx-auto'>
       <h2 className='font-semibold'>Ordle</h2>
       {/* <nav className=''>
         <ul className='flex gap-4'>
