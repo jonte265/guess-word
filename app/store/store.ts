@@ -108,6 +108,10 @@ const useWordStore = create<wordStoreType>((set) => ({
         return {};
       }
 
+      if (state.guess.length < state.chosenWord.length) {
+        return {};
+      }
+
       console.log('guess:', state.guess);
       console.log('chosenWord:', state.chosenWord);
 
