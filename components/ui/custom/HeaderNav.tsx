@@ -21,7 +21,9 @@ function HeaderNav() {
           </li>
         </ul>
       </nav> */}
-      <p>Win streak: {wordStore.winStreak}</p>
+      <p>
+        Win streak: <strong>{wordStore.winStreak}</strong>
+      </p>
     </header>
   );
 }

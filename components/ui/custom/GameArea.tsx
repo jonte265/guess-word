@@ -66,7 +66,7 @@ function GameArea() {
                       key={index}
                       className='flex justify-center items-center'
                     >
-                      <LetterBox letter={word} />
+                      <LetterBox status={0} letter={word} />
                     </div>
                   );
                 })}
@@ -143,7 +143,7 @@ function GameArea() {
             {words[random].split('').map((word, index) => {
               return (
                 <div key={index} className='flex justify-center items-center'>
-                  <LetterBox letter={word} />
+                  <LetterBox status={0} letter={word} />
                 </div>
               );
             })}
