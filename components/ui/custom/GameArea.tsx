@@ -1,9 +1,11 @@
 'use client';
 
+import words from '@/app/data/words.json';
 import { Button } from '@/components/ui/button';
 import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
 import useWordStore from '@/app/store/store';
 import LetterBox from './LetterBox';
+import { useEffect, useState } from 'react';
 
 // type GameAreaType = {
 //   alp: string;
@@ -11,6 +13,16 @@ import LetterBox from './LetterBox';
 
 function GameArea() {
   const wordStore = useWordStore();
+
+  const [random, setRandom] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRandom(Math.floor(Math.random() * words.length));
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  });
 
   return (
     <section className='flex flex-col gap-4 justify-center items-center max-w-2xl m-auto'>
@@ -95,8 +107,17 @@ function GameArea() {
           {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>}
         </>
       ) : (
-        <div className='flex flex-col gap-4 justify-center items-center'>
+        <div className='flex flex-col gap-8 justify-center items-center'>
           <h1 className='text-2xl'>Guess the right word in 5 guesses!</h1>
+          <div className='flex gap-2 items-center justify-center'>
+            {words[random].split('').map((word, index) => {
+              return (
+                <div key={index} className='flex justify-center items-center'>
+                  <LetterBox letter={word} />
+                </div>
+              );
+            })}
+          </div>
           <Button onClick={wordStore.startGame}>Start</Button>
         </div>
       )}
