@@ -76,35 +76,62 @@ function GameArea() {
           )}
 
           {/* Keyboard */}
-          <div className='flex flex-wrap justify-center items-center sm:w-auto p-2 mt-4 border rounded-lg'>
-            {alphabetKeyboard.map((alp: string, index: number) => (
+          <div className='flex flex-col gap-2 mt-4'>
+            <div className='flex justify-center items-center gap-1'>
+              {alphabetKeyboard.top_row.map((alp: string, index: number) => (
+                <Button
+                  key={index}
+                  variant='outline'
+                  size='icon'
+                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  onClick={() => wordStore.enterInput(alp)}
+                >
+                  {alp}
+                </Button>
+              ))}
+            </div>
+            <div className='flex justify-center items-center gap-1'>
+              {alphabetKeyboard.middle_row.map((alp: string, index: number) => (
+                <Button
+                  key={index}
+                  variant='outline'
+                  size='icon'
+                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  onClick={() => wordStore.enterInput(alp)}
+                >
+                  {alp}
+                </Button>
+              ))}
+            </div>
+            <div className='flex justify-center items-center gap-1'>
               <Button
-                key={index}
+                onClick={wordStore.backspaceInput}
                 variant='outline'
-                size='lg'
-                className='flex-1 min-w-[50px] m-1 text-center'
-                onClick={() => wordStore.enterInput(alp)}
+                size='icon'
+                className='w-12 h-10 sm:w-16 sm:h-12'
               >
-                {alp}
+                🔙
               </Button>
-            ))}
+              {alphabetKeyboard.bottom_row.map((alp: string, index: number) => (
+                <Button
+                  key={index}
+                  variant='outline'
+                  size='icon'
+                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  onClick={() => wordStore.enterInput(alp)}
+                >
+                  {alp}
+                </Button>
+              ))}
 
-            <Button
-              onClick={wordStore.backspaceInput}
-              variant='outline'
-              size='lg'
-              className='flex-1 min-w-[50px] m-1'
-            >
-              🔙
-            </Button>
-            <Button
-              onClick={wordStore.submitGuess}
-              variant='outline'
-              size='lg'
-              className='flex-1 min-w-[50px] m-1'
-            >
-              Submit
-            </Button>
+              <Button
+                onClick={wordStore.submitGuess}
+                size='lg'
+                className='w-18 h-10 sm:h-12'
+              >
+                Submit
+              </Button>
+            </div>
           </div>
 
           {/* {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>} */}
