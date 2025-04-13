@@ -16,6 +16,7 @@ type wordStoreType = {
   gameBoard: Cell[][];
   rowIndex: number;
   cellIndex: number;
+  winStreak: number;
   startGame: () => void;
   backspaceInput: () => void;
   enterInput: (alp: string) => void;
@@ -28,6 +29,7 @@ const useWordStore = create<wordStoreType>((set) => ({
   gameStart: false,
   gameOver: false,
   gameWin: false,
+  winStreak: 0,
 
   gameBoard: [],
   rowIndex: 0,
@@ -190,11 +192,13 @@ const useWordStore = create<wordStoreType>((set) => ({
         return {
           gameWin: true,
           gameBoard: newGameBoard,
+          winStreak: state.winStreak + 1,
         };
       } else if (state.rowIndex >= 5) {
         return {
           gameOver: true,
           gameBoard: newGameBoard,
+          winStreak: 0,
         };
       } else {
         return {
