@@ -17,8 +17,8 @@ function GameArea() {
       {wordStore.gameStart ? (
         <>
           {/* Question area */}
-          {/* <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
-          <h1 className='text-2xl'>Guess: {wordStore.guess}</h1> */}
+          <h1 className='text-2xl'>Chosenword: {wordStore.chosenWord}</h1>
+          <h1 className='text-2xl'>Guess: {wordStore.guess}</h1>
 
           <div className='flex justify-center items-center flex-col gap-4'>
             {wordStore.gameBoard.map((row, rowIndex) => (
@@ -40,6 +40,15 @@ function GameArea() {
           {wordStore.gameWin === true && (
             <>
               <h1 className='text-2xl'>Correct!</h1>
+              <Button onClick={wordStore.startGame}>Play Again</Button>
+            </>
+          )}
+          {wordStore.gameOver === true && (
+            <>
+              <h1 className='text-2xl'>Game Over!</h1>
+              <h1 className='text-2xl font-semibold'>
+                Answer: {wordStore.chosenWord}
+              </h1>
               <Button onClick={wordStore.startGame}>Play Again</Button>
             </>
           )}
@@ -76,7 +85,7 @@ function GameArea() {
             </Button>
           </div>
 
-          {/* {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>} */}
+          {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>}
         </>
       ) : (
         <div className='flex flex-col gap-4 justify-center items-center'>

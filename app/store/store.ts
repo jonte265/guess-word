@@ -123,6 +123,7 @@ const useWordStore = create<wordStoreType>((set) => ({
 
       console.log('splitChosenWord:', splitChosenWord);
 
+      // Make boxes gray,green,yellow
       splitChosenWord.forEach((split, index) => {
         console.log('körs! Index: + split:', index, split);
 
@@ -144,6 +145,12 @@ const useWordStore = create<wordStoreType>((set) => ({
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
           gameWin: true,
+          gameBoard: newGameBoard,
+        };
+      } else if (state.rowIndex >= 5) {
+        console.log('Game over');
+        return {
+          gameOver: true,
           gameBoard: newGameBoard,
         };
       } else {
