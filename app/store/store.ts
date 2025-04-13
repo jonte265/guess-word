@@ -1,4 +1,5 @@
 import words from '@/app/data/words.json';
+import { log } from 'node:console';
 import { create } from 'zustand';
 
 type Cell = {
@@ -112,61 +113,123 @@ const useWordStore = create<wordStoreType>((set) => ({
         return {};
       }
 
-      console.log('guess:', state.guess);
-      console.log('chosenWord:', state.chosenWord);
-
       const newGameBoard = state.gameBoard.map((row) =>
         row.map((cell) => ({ ...cell }))
       );
 
-      const splitChosenWord = state.chosenWord.split('');
+      const splitChosenWord = state.chosenWord.toUpperCase().split('');
 
-      console.log('splitChosenWord:', splitChosenWord);
+      // // Make boxes gray,green,yellow
+      // splitChosenWord.forEach((split, index) => {
+      //   // Default grey box
+      //   newGameBoard[state.rowIndex][index].correct = 1;
 
-      // Make boxes gray,green,yellow
+      //   // Count how many letters is used
+      //   const letterCountWord = splitChosenWord;
+
+      //   const currentLetter =
+      //     newGameBoard[state.rowIndex][index].letter.toUpperCase();
+
+      //   console.log('indexRemove before: ', currentLetter);
+      //   console.log('indexRemove before lettercoundword : ', letterCountWord);
+
+      //   const indexRemove = letterCountWord.indexOf(currentLetter);
+
+      //   console.log('indexRemove after: ', indexRemove);
+
+      //   // If match, green box
+      //   if (currentLetter === split.toUpperCase()) {
+      //     newGameBoard[state.rowIndex][index].correct = 3;
+
+      //     console.log('SPLICE letterCountWord : ', letterCountWord);
+      //     letterCountWord.splice(indexRemove, 1);
+
+      //     console.log('AFTER SPLICE letterCountWord : ', letterCountWord);
+      //   }
+      //   // If Contains, yellow box
+      //   else if (
+      //     state.chosenWord.toUpperCase().includes(currentLetter) &&
+      //     letterCountWord.includes(currentLetter)
+      //   ) {
+      //     console.log('YELLOW BOX');
+
+      //     console.log(
+      //       'letterCountWord.includes(currentLetter): ',
+      //       letterCountWord.includes(currentLetter)
+      //     );
+      //     console.log('letterCountWord: ', letterCountWord);
+      //     console.log('currentLetter: ', currentLetter);
+
+      //     newGameBoard[state.rowIndex][index].correct = 2;
+      //   }
+      // });
+
+      // Count how many letters is used
+
+      const usedLetters = state.chosenWord.toUpperCase().split('');
+
+      let indexRemove;
+
+      console.log('usedLetters: ', usedLetters);
+
+      // Mark as grey
       splitChosenWord.forEach((split, index) => {
-        console.log('körs! Index: + split:', index, split);
+        console.log('Mark as grey');
 
-        // Count how many letters i used
-        const letterCountWord = splitChosenWord;
-        console.log('letterCountWord : ', letterCountWord);
-
-        // Default grey box
         newGameBoard[state.rowIndex][index].correct = 1;
+      });
+
+      // Mark as green
+      splitChosenWord.forEach((split, index) => {
+        console.log('Körs green');
+        const currentLetter =
+          newGameBoard[state.rowIndex][index].letter.toUpperCase();
+
+        if (currentLetter === split.toUpperCase()) {
+          newGameBoard[state.rowIndex][index].correct = 3;
+
+          indexRemove = usedLetters.indexOf(currentLetter);
+
+          console.log('usedLetters before splice: ', usedLetters);
+          usedLetters.splice(indexRemove, 1);
+          console.log('usedLetters after splice: ', usedLetters);
+        }
+      });
+
+      // Mark as yellow
+      splitChosenWord.forEach((split, index) => {
+        console.log('Körs yellow');
 
         const currentLetter =
           newGameBoard[state.rowIndex][index].letter.toUpperCase();
 
-        // If match, green box
-        if (currentLetter === split.toUpperCase()) {
-          console.log(
-            'MATCH:',
-            newGameBoard[state.rowIndex][index].letter + split
-          );
+        console.log('usedLetters before yellow if: ', usedLetters);
 
-          newGameBoard[state.rowIndex][index].correct = 3;
-
-          const indexRemove = letterCountWord.indexOf(currentLetter);
-
-          letterCountWord.splice(indexRemove, 1);
-
-          console.log('letterCountWord : ', letterCountWord);
-        } else if (
-          // If Contains, yellow box
+        if (
           state.chosenWord.toUpperCase().includes(currentLetter) &&
-          letterCountWord.includes(currentLetter)
+          usedLetters.includes(currentLetter)
         ) {
           console.log(
-            'PARTIAL MATCH:',
-            newGameBoard[state.rowIndex][index].letter +
-              split.toUpperCase().includes(currentLetter)
+            'chosen word includes: ',
+            state.chosenWord.toUpperCase().includes(currentLetter),
+            currentLetter
+          );
+          console.log(
+            'usedLEtters includes: ',
+            usedLetters.includes(currentLetter),
+            currentLetter
           );
 
           newGameBoard[state.rowIndex][index].correct = 2;
+          console.log('usedLetters in yellow if: ', usedLetters);
+
+          indexRemove = usedLetters.indexOf(currentLetter);
+
+          console.log('usedLetters before splice: ', usedLetters);
+          usedLetters.splice(indexRemove, 1);
+          console.log('usedLetters after splice: ', usedLetters);
         }
       });
-
-      console.log('newgameboard:', newGameBoard);
 
       // Check if correct guess
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
@@ -175,7 +238,6 @@ const useWordStore = create<wordStoreType>((set) => ({
           gameBoard: newGameBoard,
         };
       } else if (state.rowIndex >= 5) {
-        console.log('Game over');
         return {
           gameOver: true,
           gameBoard: newGameBoard,

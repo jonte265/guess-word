@@ -62,8 +62,11 @@ function GameArea() {
               <div className='flex gap-2 items-center justify-center'>
                 {wordStore.chosenWord.split('').map((word, index) => {
                   return (
-                    <div className='flex justify-center items-center'>
-                      <LetterBox key={index} letter={word} />
+                    <div
+                      key={index}
+                      className='flex justify-center items-center'
+                    >
+                      <LetterBox letter={word} />
                     </div>
                   );
                 })}
