@@ -26,7 +26,9 @@ function LetterBox({ letter, status }: LetterBoxType) {
       className={`flex justify-center items-center border-2 dark:border-gray-500 p-4 w-12 h-16 text-center ${backgroundColor}`}
     >
       {/* If no letter add empty space */}
-      <p className={`font-semibold ${textColor}`}>{letter.toUpperCase()}</p>
+      <p className={`font-semibold text-xl ${textColor}`}>
+        {letter.toUpperCase()}
+      </p>
     </div>
   );
 }
