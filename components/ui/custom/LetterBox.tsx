@@ -25,12 +25,13 @@ function LetterBox({ letter, status }: LetterBoxType) {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      key={letter} // Key to retrigger animation when letter change
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5, type: 'spring', stiffness: 300 }}
       className={`flex justify-center items-center border-2 dark:border-gray-500 p-4 w-12 h-16 text-center ${backgroundColor}`}
     >
-      {/* If no letter add empty space */}
       <p className={`font-semibold text-xl ${textColor}`}>
         {letter.toUpperCase()}
       </p>
