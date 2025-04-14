@@ -106,11 +106,11 @@ function GameArea() {
             <div className='flex justify-center items-center gap-1'>
               <Button
                 onClick={wordStore.backspaceInput}
-                variant='outline'
+                variant='secondary'
                 size='icon'
-                className='w-12 h-10 sm:w-16 sm:h-12'
+                className='w-12 h-10 sm:w-16 sm:h-12 font-bold'
               >
-                🔙
+                ←
               </Button>
               {alphabetKeyboard.bottom_row.map((alp: string, index: number) => (
                 <Button
