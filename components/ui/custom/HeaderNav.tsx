@@ -10,7 +10,7 @@ function HeaderNav() {
       <h2 className='font-semibold'>Ordle</h2>
 
       <p>
-        Win streak: <strong>{wordStore.winStreak}</strong>
+        Win streak: <strong>{wordStore.winStreak} 🏆</strong>
       </p>
     </header>
   );

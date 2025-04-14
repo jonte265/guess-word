@@ -51,7 +51,7 @@ function GameArea() {
 
           {wordStore.gameWin === true && (
             <>
-              <h1 className='text-2xl'>Correct!</h1>
+              <h1 className='text-2xl'>Correct! 🏆</h1>
               <Button onClick={wordStore.startGame}>Play Again</Button>
             </>
           )}
