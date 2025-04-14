@@ -12,6 +12,7 @@ Check out the live version here: https://guess-word-silk.vercel.app/
 - **Tailwind CSS** – Utility-first CSS framework for rapid styling
 - **shadcn/ui** – Component library for creating smooth UI elements
 - **Zustand** – Simple and efficient state management for handling game state
+- **Framer Motion** – A powerful library for animations in React, used to enhance the UI with smooth transitions and animations.
 
 ## 📌 Features
 
@@ -30,7 +31,9 @@ Check out the live version here: https://guess-word-silk.vercel.app/
 
 - 📱 **Fully mobile responsive**
 
-- 🌗 **Light/Dark mode support (soon)**
+- 🌗 **Light/Dark mode support**
+
+- 🎮 **Smooth Animations** – Fluid animations to enhance the user experience.
 
 ## 📦 Installation
 
