@@ -2,9 +2,11 @@
 
 An interactive Wordle game where users guess a 5-letter Swedish word with 6 attempts.
 
-### Live Demo
+## Live Demo
 
 Check out the live version here: https://guess-word-silk.vercel.app/
+
+![Image](https://github.com/user-attachments/assets/b7f9ba2a-3db3-4206-8811-357d2a8a956d)
 
 ## 🚀 Technologies
 
