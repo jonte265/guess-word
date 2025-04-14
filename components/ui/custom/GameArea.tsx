@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'motion/react';
 import words from '@/app/data/words.json';
 import { Button } from '@/components/ui/button';
 import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
@@ -50,29 +51,48 @@ function GameArea() {
           </div>
 
           {wordStore.gameWin === true && (
-            <>
-              <h1 className='text-2xl'>Correct! 🏆</h1>
-              <Button onClick={wordStore.startGame}>Play Again</Button>
-            </>
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className='flex flex-col items-center gap-2'
+            >
+              <h1 className='text-2xl pb-2'>Correct! 🏆</h1>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <Button onClick={wordStore.startGame}>Play Again</Button>
+              </motion.div>
+            </motion.div>
           )}
           {wordStore.gameOver === true && (
-            <>
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className='flex flex-col items-center gap-2'
+            >
               <h1 className='text-2xl'>Game Over!</h1>
               <h1 className='text-2xl font-semibold'>Answer:</h1>
-              <div className='flex gap-2 items-center justify-center'>
-                {wordStore.chosenWord.split('').map((word, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className='flex justify-center items-center'
-                    >
-                      <LetterBox status={0} letter={word} />
-                    </div>
-                  );
-                })}
+              <div className='flex gap-2 items-center justify-center pb-2'>
+                {wordStore.chosenWord.split('').map((word, index) => (
+                  <div key={index} className='flex justify-center items-center'>
+                    <LetterBox status={0} letter={word} />
+                  </div>
+                ))}
               </div>
-              <Button onClick={wordStore.startGame}>Play Again</Button>
-            </>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <Button onClick={wordStore.startGame}>Play Again</Button>
+              </motion.div>
+            </motion.div>
           )}
 
           {/* Keyboard */}
@@ -137,7 +157,12 @@ function GameArea() {
           {/* {wordStore.gameWin ? <h2>You won!</h2> : <h2>You've NOT won</h2>} */}
         </>
       ) : (
-        <div className='flex flex-col gap-8 justify-center items-center'>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className='flex flex-col gap-8 justify-center items-center'
+        >
           <h1 className='text-2xl'>Guess the right word in 5 guesses!</h1>
           <div className='flex gap-2 items-center justify-center'>
             {words[random].split('').map((word, index) => {
@@ -148,8 +173,14 @@ function GameArea() {
               );
             })}
           </div>
-          <Button onClick={wordStore.startGame}>Start</Button>
-        </div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Button onClick={wordStore.startGame}>Start</Button>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   );

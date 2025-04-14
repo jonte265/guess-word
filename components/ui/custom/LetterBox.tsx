@@ -1,3 +1,5 @@
+import { motion } from 'motion/react';
+
 type LetterBoxType = {
   letter: string;
   status: number;
@@ -22,14 +24,17 @@ function LetterBox({ letter, status }: LetterBoxType) {
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className={`flex justify-center items-center border-2 dark:border-gray-500 p-4 w-12 h-16 text-center ${backgroundColor}`}
     >
       {/* If no letter add empty space */}
       <p className={`font-semibold text-xl ${textColor}`}>
         {letter.toUpperCase()}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
