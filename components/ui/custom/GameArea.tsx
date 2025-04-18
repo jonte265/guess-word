@@ -174,7 +174,7 @@ function GameArea() {
             })}
           </div>
           <h2 className='text-xl font-semibold'>How to Play</h2>
-          <div>
+          <div className='p-2'>
             <p>
               Guess the <strong>5</strong>-letter word.
             </p>
