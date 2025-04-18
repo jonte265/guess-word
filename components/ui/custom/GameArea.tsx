@@ -173,6 +173,27 @@ function GameArea() {
               );
             })}
           </div>
+          <h2 className='text-xl font-semibold'>How to Play</h2>
+          <div>
+            <p>
+              Guess the <strong>5</strong>-letter word.
+            </p>
+            <p>
+              You have <strong>6</strong> tries.
+            </p>
+            <p>After each guess, the colors show how close you are:</p>
+            <p>
+              🟩 <strong>Green</strong>: Correct letter in the correct spot.
+            </p>
+            <p>
+              🟨 <strong>Yellow</strong>: Letter is in the word but in the wrong
+              spot.
+            </p>
+            <p>
+              ⬜ <strong>Gray</strong>: Letter is not in the word.
+            </p>
+          </div>
+
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
