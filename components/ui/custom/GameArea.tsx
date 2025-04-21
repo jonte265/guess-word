@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
 import useWordStore from '@/app/store/store';
 import LetterBox from './LetterBox';
+import KeyboardBtn from './KeyboardBtn';
 import { useEffect, useState } from 'react';
 
 // type GameAreaType = {
@@ -99,28 +100,20 @@ function GameArea() {
           <div className='flex flex-col gap-2 mt-4'>
             <div className='flex justify-center items-center gap-1'>
               {alphabetKeyboard.top_row.map((alp: string, index: number) => (
-                <Button
+                <KeyboardBtn
                   key={index}
-                  variant='outline'
-                  size='icon'
-                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  text={alp}
                   onClick={() => wordStore.enterInput(alp)}
-                >
-                  {alp}
-                </Button>
+                />
               ))}
             </div>
             <div className='flex justify-center items-center gap-1'>
               {alphabetKeyboard.middle_row.map((alp: string, index: number) => (
-                <Button
+                <KeyboardBtn
                   key={index}
-                  variant='outline'
-                  size='icon'
-                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  text={alp}
                   onClick={() => wordStore.enterInput(alp)}
-                >
-                  {alp}
-                </Button>
+                />
               ))}
             </div>
             <div className='flex justify-center items-center gap-1'>
@@ -133,15 +126,11 @@ function GameArea() {
                 ←
               </Button>
               {alphabetKeyboard.bottom_row.map((alp: string, index: number) => (
-                <Button
+                <KeyboardBtn
                   key={index}
-                  variant='outline'
-                  size='icon'
-                  className='w-8 h-10 sm:w-12 sm:h-12'
+                  text={alp}
                   onClick={() => wordStore.enterInput(alp)}
-                >
-                  {alp}
-                </Button>
+                />
               ))}
 
               <Button
