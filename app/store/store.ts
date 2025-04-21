@@ -156,8 +156,6 @@ const useWordStore = create<wordStoreType>((set) => ({
         }
       });
 
-      console.log(newGameBoard);
-
       // Check if correct guess
       if (state.guess.toUpperCase() === state.chosenWord.toUpperCase()) {
         return {
