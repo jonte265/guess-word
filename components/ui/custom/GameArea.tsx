@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import words from '@/app/data/words.json';
 import { Button } from '@/components/ui/button';
 import alphabetKeyboard from '@/app/data/alphabetKeyboard.json';
+import alphabet from '@/app/data/alphabet.json';
 import useWordStore from '@/app/store/store';
 import LetterBox from './LetterBox';
 import KeyboardBtn from './KeyboardBtn';
@@ -17,6 +18,26 @@ function GameArea() {
   const wordStore = useWordStore();
 
   const [random, setRandom] = useState(0);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const key = e.key.toUpperCase();
+
+      if (alphabet.includes(key)) {
+        wordStore.enterInput(key);
+      } else if (e.key === 'Backspace') {
+        wordStore.backspaceInput();
+      } else if (e.key === 'Enter') {
+        wordStore.submitGuess();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
